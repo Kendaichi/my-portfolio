@@ -45,7 +45,7 @@ export default function HeroSection() {
               variants={item}
               className="text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight leading-[1.1]"
             >
-              Hi, I'm Franclloyd D. Dagdag <br />
+              Hi, I'm Franclloyd D. Dagdag &<br />
               I Create Systems
               <br />
               <span className="text-gradient">That Scale.</span>
