@@ -4,6 +4,9 @@ import HeroSection from '@/components/HeroSection';
 import Section from '@/components/Section';
 import ContactForm from '@/components/ContactForm';
 import { Code2, Database, Globe, Layers, Server, Smartphone } from 'lucide-react';
+import projectTaskEngine from '@/assets/project-task-engine.jpg';
+import projectAnalytics from '@/assets/project-analytics.jpg';
+import projectApiGateway from '@/assets/project-api-gateway.jpg';
 
 const SKILLS = [
   { category: 'Frontend', items: ['React', 'TypeScript', 'Next.js', 'Tailwind CSS'] },
@@ -39,18 +42,21 @@ const PROJECTS = [
     description: 'A fault-tolerant distributed task processing system handling 50K+ jobs/minute.',
     tech: ['Go', 'Redis', 'gRPC', 'Kubernetes'],
     icon: Server,
+    image: projectTaskEngine,
   },
   {
     title: 'Real-Time Analytics Dashboard',
     description: 'Live metrics visualization platform with sub-second data refresh.',
     tech: ['React', 'WebSocket', 'D3.js', 'PostgreSQL'],
     icon: Layers,
+    image: projectAnalytics,
   },
   {
     title: 'API Gateway Platform',
     description: 'High-throughput API management layer with rate limiting and auth.',
     tech: ['Node.js', 'TypeScript', 'Docker', 'Nginx'],
     icon: Globe,
+    image: projectApiGateway,
   },
 ];
 
@@ -166,24 +172,34 @@ export default function Index() {
             {PROJECTS.map((project, i) => (
               <div
                 key={i}
-                className="p-6 rounded-xl bg-card/60 border border-border/30 space-y-3 hover:border-border/60 transition-colors"
+                className="rounded-xl bg-card/60 border border-border/30 overflow-hidden hover:border-border/60 transition-colors"
               >
-                <div className="flex items-center gap-3">
-                  <project.icon className="h-5 w-5 text-muted-foreground" />
-                  <h3 className="text-lg font-semibold">{project.title}</h3>
+                <div className="aspect-[16/9] overflow-hidden">
+                  <img
+                    src={project.image}
+                    alt={project.title}
+                    className="w-full h-full object-cover"
+                    loading="lazy"
+                  />
                 </div>
-                <p className="text-sm text-muted-foreground leading-relaxed">
-                  {project.description}
-                </p>
-                <div className="flex flex-wrap gap-2 pt-1">
-                  {project.tech.map(t => (
-                    <span
-                      key={t}
-                      className="px-2 py-0.5 text-xs font-mono rounded bg-accent/50 text-muted-foreground"
-                    >
-                      {t}
-                    </span>
-                  ))}
+                <div className="p-6 space-y-3">
+                  <div className="flex items-center gap-3">
+                    <project.icon className="h-5 w-5 text-muted-foreground" />
+                    <h3 className="text-lg font-semibold">{project.title}</h3>
+                  </div>
+                  <p className="text-sm text-muted-foreground leading-relaxed">
+                    {project.description}
+                  </p>
+                  <div className="flex flex-wrap gap-2 pt-1">
+                    {project.tech.map(t => (
+                      <span
+                        key={t}
+                        className="px-2 py-0.5 text-xs font-mono rounded bg-accent/50 text-muted-foreground"
+                      >
+                        {t}
+                      </span>
+                    ))}
+                  </div>
                 </div>
               </div>
             ))}
