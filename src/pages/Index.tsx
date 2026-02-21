@@ -111,10 +111,11 @@ export default function Index() {
                 { icon: Globe, label: 'Distributed Systems' },
                 { icon: Layers, label: 'API Design' },
                 { icon: Smartphone, label: 'Full-Stack' },
-              ].map(({ icon: Icon, label }) => (
+              ].map(({ icon: Icon, label }, i) => (
                 <div
                   key={label}
-                  className="flex items-center gap-3 p-3 rounded-lg bg-card/50 border border-border/30"
+                  className="flex items-center gap-3 p-3 rounded-lg bg-card/50 border border-border/30 transition-all duration-500 ease-out hover:border-border/60 hover:scale-[1.03]"
+                  style={{ transitionDelay: `${i * 80}ms` }}
                 >
                   <Icon className="h-4 w-4 text-muted-foreground" />
                   <span className="text-sm text-foreground/80">{label}</span>
@@ -151,7 +152,8 @@ export default function Index() {
             {EXPERIENCE.map((exp, i) => (
               <div
                 key={i}
-                className="relative pl-6 border-l border-border/40 space-y-1"
+                className="relative pl-6 border-l border-border/40 space-y-1 transition-all duration-500 ease-out"
+                style={{ transitionDelay: `${i * 120}ms` }}
               >
                 <div className="absolute left-0 top-1.5 -translate-x-1/2 w-2 h-2 rounded-full bg-foreground/60" />
                 <p className="text-xs font-mono text-muted-foreground tracking-wider">
@@ -172,7 +174,8 @@ export default function Index() {
             {PROJECTS.map((project, i) => (
               <div
                 key={i}
-                className="rounded-xl bg-card/60 border border-border/30 overflow-hidden hover:border-border/60 transition-colors"
+                className="rounded-xl bg-card/60 border border-border/30 overflow-hidden hover:border-border/60 transition-all duration-500 ease-out hover:scale-[1.01]"
+                style={{ transitionDelay: `${i * 150}ms` }}
               >
                 <div className="aspect-[16/9] overflow-hidden">
                   <img

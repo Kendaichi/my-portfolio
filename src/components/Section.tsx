@@ -33,13 +33,13 @@ export default function Section({ id, title, subtitle, children, className }: Se
         className
       )}
     >
-      <div
-        className={cn(
-          'container max-w-3xl transition-all duration-1000 ease-out',
-          visible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
-        )}
-      >
-        <div className="space-y-2 mb-12">
+      <div className="container max-w-3xl">
+        <div
+          className={cn(
+            'space-y-2 mb-12 transition-all duration-700 ease-out',
+            visible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+          )}
+        >
           <p className="text-sm font-mono tracking-widest uppercase text-muted-foreground">
             {subtitle}
           </p>
@@ -47,7 +47,14 @@ export default function Section({ id, title, subtitle, children, className }: Se
             {title}
           </h2>
         </div>
-        {children}
+        <div
+          className={cn(
+            'transition-all duration-700 ease-out delay-200',
+            visible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+          )}
+        >
+          {children}
+        </div>
       </div>
     </section>
   );
