@@ -1,4 +1,5 @@
-import { useRef, useEffect, useState, ReactNode } from 'react';
+import { ReactNode } from 'react';
+import { motion } from 'framer-motion';
 import { cn } from '@/lib/utils';
 
 interface SectionProps {
@@ -9,52 +10,40 @@ interface SectionProps {
   className?: string;
 }
 
+const fadeUp = {
+  hidden: { opacity: 0, y: 32 },
+  visible: { opacity: 1, y: 0 },
+};
+
 export default function Section({ id, title, subtitle, children, className }: SectionProps) {
-  const ref = useRef<HTMLElement>(null);
-  const [visible, setVisible] = useState(false);
-
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) setVisible(true);
-      },
-      { threshold: 0.15 }
-    );
-    if (ref.current) observer.observe(ref.current);
-    return () => observer.disconnect();
-  }, []);
-
   return (
     <section
       id={id}
-      ref={ref}
-      className={cn(
-        'min-h-screen flex items-center py-24 lg:py-32',
-        className
-      )}
+      className={cn('min-h-screen flex items-center py-24 lg:py-32', className)}
     >
       <div className="container max-w-3xl">
-        <div
-          className={cn(
-            'space-y-2 mb-12 transition-all duration-700 ease-out',
-            visible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
-          )}
+        <motion.div
+          className="space-y-2 mb-12"
+          variants={fadeUp}
+          initial="hidden"
+          whileInView="visible"
+          transition={{ duration: 0.7, ease: 'easeOut' }}
+          viewport={{ once: true, amount: 0.15 }}
         >
           <p className="text-sm font-mono tracking-widest uppercase text-muted-foreground">
             {subtitle}
           </p>
-          <h2 className="text-3xl sm:text-4xl font-bold tracking-tight">
-            {title}
-          </h2>
-        </div>
-        <div
-          className={cn(
-            'transition-all duration-700 ease-out delay-200',
-            visible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
-          )}
+          <h2 className="text-3xl sm:text-4xl font-bold tracking-tight">{title}</h2>
+        </motion.div>
+        <motion.div
+          variants={fadeUp}
+          initial="hidden"
+          whileInView="visible"
+          transition={{ duration: 0.7, ease: 'easeOut', delay: 0.2 }}
+          viewport={{ once: true, amount: 0.15 }}
         >
           {children}
-        </div>
+        </motion.div>
       </div>
     </section>
   );

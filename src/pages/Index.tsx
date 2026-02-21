@@ -1,64 +1,98 @@
-import { useRef, useEffect } from 'react';
-import CubeCanvas from '@/components/CubeCanvas';
-import HeroSection from '@/components/HeroSection';
-import Section from '@/components/Section';
-import ContactForm from '@/components/ContactForm';
-import { Code2, Database, Globe, Layers, Server, Smartphone } from 'lucide-react';
-import projectTaskEngine from '@/assets/project-task-engine.jpg';
-import projectAnalytics from '@/assets/project-analytics.jpg';
-import projectApiGateway from '@/assets/project-api-gateway.jpg';
+import { useRef, useEffect } from "react";
+import { motion, Variants } from "framer-motion";
+import CubeCanvas from "@/components/CubeCanvas";
+import HeroSection from "@/components/HeroSection";
+import Section from "@/components/Section";
+import ContactForm from "@/components/ContactForm";
+import {
+  Code2,
+  Database,
+  Globe,
+  Layers,
+  Server,
+  Smartphone,
+} from "lucide-react";
+
+import projectBlockchain from "@/assets/project-blockchain.jpg";
+import projectProcurement from "@/assets/project-procurement.jpg";
+import projectInternalAudit from "@/assets/project-internal-audit.png";
 
 const SKILLS = [
-  { category: 'Frontend', items: ['React', 'TypeScript', 'Next.js', 'Tailwind CSS'] },
-  { category: 'Backend', items: ['Node.js', 'Python', 'Go', 'GraphQL'] },
-  { category: 'Infrastructure', items: ['AWS', 'Docker', 'Kubernetes', 'Terraform'] },
-  { category: 'Data', items: ['PostgreSQL', 'Redis', 'Elasticsearch', 'Kafka'] },
+  {
+    category: "Frontend",
+    items: ["React", "Shadcn", "Tailwind CSS", "Flutter"],
+  },
+  { category: "Backend", items: ["Node.js", "Python", "Laravel"] },
+  {
+    category: "Data",
+    items: ["PostgreSQL", "MySQL", "Firebase", "Supabase"],
+  },
+  {
+    category: "Others",
+    items: ["Web3", "Docker"],
+  },
 ];
 
 const EXPERIENCE = [
+  // {
+  //   role: "Senior Software Engineer",
+  //   company: "Scale Systems Inc.",
+  //   period: "2022 — Present",
+  //   description:
+  //     "Architecting distributed microservices handling 10M+ daily transactions.",
+  // },
   {
-    role: 'Senior Software Engineer',
-    company: 'Scale Systems Inc.',
-    period: '2022 — Present',
-    description: 'Architecting distributed microservices handling 10M+ daily transactions.',
+    role: "Full Stack Web Developer",
+    company: "City Government of Butuan",
+    period: "May 2024 - Present",
+    description:
+      "Lead the digital transformation initiative, developing user-centric Internal Audit Application called IAMS",
   },
   {
-    role: 'Software Engineer',
-    company: 'DataFlow',
-    period: '2020 — 2022',
-    description: 'Built real-time data pipelines and customer-facing analytics dashboards.',
-  },
-  {
-    role: 'Full-Stack Developer',
-    company: 'StartupLab',
-    period: '2018 — 2020',
-    description: 'Developed and shipped 3 products from zero to production.',
+    role: "Project Technical Assistant III",
+    company: "DOST Caraga Regional Office",
+    period: "August 2023 — May 2024",
+    description:
+      "Developed and shipped 3 products from zero to production. Aside from development, I also led the STORRM Project for DRRM related activities, projects and events.",
   },
 ];
 
 const PROJECTS = [
   {
-    title: 'Distributed Task Engine',
-    description: 'A fault-tolerant distributed task processing system handling 50K+ jobs/minute.',
-    tech: ['Go', 'Redis', 'gRPC', 'Kubernetes'],
+    title: "Internal Audit Management System (IAMS)",
+    description:
+      "A centralized audit workflow platform designed for government operations. Streamlines audit planning, risk assessment, reporting, and tracking with real-time status monitoring and role-based access control.",
+    tech: ["ReactJS", "Laravel", "NodeJS", "WebSocket", "MySQL"],
     icon: Server,
-    image: projectTaskEngine,
+    image: projectInternalAudit,
   },
   {
-    title: 'Real-Time Analytics Dashboard',
-    description: 'Live metrics visualization platform with sub-second data refresh.',
-    tech: ['React', 'WebSocket', 'D3.js', 'PostgreSQL'],
+    title: "Procurement Management System",
+    description:
+      "End-to-end procurement tracking system that digitizes requisitions, approvals, supplier coordination, and compliance monitoring, reducing manual paperwork and improving process transparency.",
+    tech: ["ReactJS", "WebSocket", "FastAPI", "PostgreSQL"],
     icon: Layers,
-    image: projectAnalytics,
+    image: projectProcurement,
   },
   {
-    title: 'API Gateway Platform',
-    description: 'High-throughput API management layer with rate limiting and auth.',
-    tech: ['Node.js', 'TypeScript', 'Docker', 'Nginx'],
+    title: "Automated Financial Audit with Blockchain",
+    description:
+      "Blockchain-backed financial verification platform enabling tamper-resistant audit trails, document validation, and automated compliance checks using smart contracts and OCR-based document extraction.",
+    tech: ["Node.js", "ReactJS", "Hyperledger Besu", "IPFS", "OCR"],
     icon: Globe,
-    image: projectApiGateway,
+    image: projectBlockchain,
   },
 ];
+
+const staggerContainer: Variants = {
+  hidden: {},
+  visible: { transition: { staggerChildren: 0.08 } },
+};
+
+const fadeUpItem: Variants = {
+  hidden: { opacity: 0, y: 20 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.5, ease: "easeOut" } },
+};
 
 export default function Index() {
   const scrollProgress = useRef(0);
@@ -68,9 +102,9 @@ export default function Index() {
       const max = document.documentElement.scrollHeight - window.innerHeight;
       scrollProgress.current = max > 0 ? window.scrollY / max : 0;
     };
-    window.addEventListener('scroll', handleScroll, { passive: true });
+    window.addEventListener("scroll", handleScroll, { passive: true });
     handleScroll();
-    return () => window.removeEventListener('scroll', handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
   return (
@@ -93,7 +127,7 @@ export default function Index() {
         <Section id="about" title="About" subtitle="01">
           <div className="space-y-5 text-muted-foreground leading-relaxed">
             <p className="text-lg text-foreground/90">
-              I'm a systems-minded engineer who thrives at the intersection of
+              I'm a systems-minded programmer who thrives at the intersection of
               architecture and execution.
             </p>
             <p>
@@ -103,37 +137,54 @@ export default function Index() {
               that disappears — so teams can ship faster and users get
               reliability they never have to think about.
             </p>
-            <div className="grid grid-cols-2 sm:grid-cols-3 gap-4 pt-4">
+            <motion.div
+              className="grid grid-cols-2 sm:grid-cols-3 gap-4 pt-4"
+              variants={staggerContainer}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true, amount: 0.2 }}
+            >
               {[
-                { icon: Code2, label: 'Clean Code' },
-                { icon: Server, label: 'System Design' },
-                { icon: Database, label: 'Data Architecture' },
-                { icon: Globe, label: 'Distributed Systems' },
-                { icon: Layers, label: 'API Design' },
-                { icon: Smartphone, label: 'Full-Stack' },
-              ].map(({ icon: Icon, label }, i) => (
-                <div
+                { icon: Code2, label: "Clean Code" },
+                { icon: Server, label: "System Design" },
+                { icon: Database, label: "Data Architecture" },
+                // { icon: Globe, label: "Distributed Systems" },
+                { icon: Layers, label: "API Design" },
+                { icon: Smartphone, label: "Full-Stack" },
+              ].map(({ icon: Icon, label }) => (
+                <motion.div
                   key={label}
-                  className="flex items-center gap-3 p-3 rounded-lg bg-card/50 border border-border/30 transition-all duration-500 ease-out hover:border-border/60 hover:scale-[1.03]"
-                  style={{ transitionDelay: `${i * 80}ms` }}
+                  variants={fadeUpItem}
+                  whileHover={{ scale: 1.03 }}
+                  className="flex items-center gap-3 p-3 rounded-lg bg-card/50 border border-border/30 hover:border-border/60 transition-colors"
                 >
                   <Icon className="h-4 w-4 text-muted-foreground" />
                   <span className="text-sm text-foreground/80">{label}</span>
-                </div>
+                </motion.div>
               ))}
-            </div>
+            </motion.div>
           </div>
         </Section>
 
         <Section id="skills" title="Skills" subtitle="02">
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-8">
-            {SKILLS.map(group => (
-              <div key={group.category} className="space-y-3">
+          <motion.div
+            className="grid grid-cols-1 sm:grid-cols-2 gap-8"
+            variants={staggerContainer}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, amount: 0.2 }}
+          >
+            {SKILLS.map((group) => (
+              <motion.div
+                key={group.category}
+                variants={fadeUpItem}
+                className="space-y-3"
+              >
                 <h3 className="text-sm font-mono tracking-wider uppercase text-muted-foreground">
                   {group.category}
                 </h3>
                 <div className="flex flex-wrap gap-2">
-                  {group.items.map(skill => (
+                  {group.items.map((skill) => (
                     <span
                       key={skill}
                       className="px-3 py-1.5 text-sm rounded-md bg-card border border-border/40 text-foreground/80"
@@ -142,18 +193,24 @@ export default function Index() {
                     </span>
                   ))}
                 </div>
-              </div>
+              </motion.div>
             ))}
-          </div>
+          </motion.div>
         </Section>
 
         <Section id="experience" title="Experience" subtitle="03">
-          <div className="space-y-8">
+          <motion.div
+            className="space-y-8"
+            variants={staggerContainer}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, amount: 0.2 }}
+          >
             {EXPERIENCE.map((exp, i) => (
-              <div
+              <motion.div
                 key={i}
-                className="relative pl-6 border-l border-border/40 space-y-1 transition-all duration-500 ease-out"
-                style={{ transitionDelay: `${i * 120}ms` }}
+                variants={fadeUpItem}
+                className="relative pl-6 border-l border-border/40 space-y-1"
               >
                 <div className="absolute left-0 top-1.5 -translate-x-1/2 w-2 h-2 rounded-full bg-foreground/60" />
                 <p className="text-xs font-mono text-muted-foreground tracking-wider">
@@ -164,18 +221,25 @@ export default function Index() {
                 <p className="text-sm text-foreground/70 pt-1">
                   {exp.description}
                 </p>
-              </div>
+              </motion.div>
             ))}
-          </div>
+          </motion.div>
         </Section>
 
         <Section id="projects" title="Projects" subtitle="04">
-          <div className="grid gap-6">
+          <motion.div
+            className="grid gap-6"
+            variants={staggerContainer}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, amount: 0.1 }}
+          >
             {PROJECTS.map((project, i) => (
-              <div
+              <motion.div
                 key={i}
-                className="rounded-xl bg-card/60 border border-border/30 overflow-hidden hover:border-border/60 transition-all duration-500 ease-out hover:scale-[1.01]"
-                style={{ transitionDelay: `${i * 150}ms` }}
+                variants={fadeUpItem}
+                whileHover={{ scale: 1.01 }}
+                className="rounded-xl bg-card/60 border border-border/30 overflow-hidden hover:border-border/60 transition-colors"
               >
                 <div className="aspect-[16/9] overflow-hidden">
                   <img
@@ -194,7 +258,7 @@ export default function Index() {
                     {project.description}
                   </p>
                   <div className="flex flex-wrap gap-2 pt-1">
-                    {project.tech.map(t => (
+                    {project.tech.map((t) => (
                       <span
                         key={t}
                         className="px-2 py-0.5 text-xs font-mono rounded bg-accent/50 text-muted-foreground"
@@ -204,23 +268,23 @@ export default function Index() {
                     ))}
                   </div>
                 </div>
-              </div>
+              </motion.div>
             ))}
-          </div>
+          </motion.div>
         </Section>
 
         <Section id="education" title="Education" subtitle="05">
           <div className="space-y-6">
             <div className="space-y-1">
               <h3 className="text-lg font-semibold">
-                B.S. Computer Science
+                B.S. Information Technology
               </h3>
               <p className="text-sm text-muted-foreground">
-                University of Technology — 2018
+                Caraga State University — 2023
               </p>
               <p className="text-sm text-foreground/70 pt-1">
-                Focus on distributed systems, algorithms, and software
-                architecture. Graduated with honors.
+                Focus on system design, algorithms, and software architecture.
+                Graduated with honors (magna cum laude).
               </p>
             </div>
           </div>
@@ -239,9 +303,24 @@ export default function Index() {
           <div className="container max-w-3xl flex flex-col sm:flex-row items-center justify-between gap-4 text-sm text-muted-foreground">
             <p>© 2026 — Engineered with precision.</p>
             <div className="flex gap-6">
-              <a href="#" className="hover:text-foreground transition-colors">GitHub</a>
-              <a href="#" className="hover:text-foreground transition-colors">LinkedIn</a>
-              <a href="#" className="hover:text-foreground transition-colors">Twitter</a>
+              <a
+                href="https://github.com/Kendaichi"
+                className="hover:text-foreground transition-colors"
+              >
+                GitHub
+              </a>
+              <a
+                href="https://ph.linkedin.com/in/franclloyd-dagdag"
+                className="hover:text-foreground transition-colors"
+              >
+                LinkedIn
+              </a>
+              <a
+                href="https://www.facebook.com/franclloyd.dagdag"
+                className="hover:text-foreground transition-colors"
+              >
+                Facebook
+              </a>
             </div>
           </div>
         </footer>
