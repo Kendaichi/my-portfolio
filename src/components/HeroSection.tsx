@@ -38,10 +38,11 @@ export default function HeroSection() {
           </div>
         </div>
 
-        <div className="absolute bottom-8 left-0 hidden lg:flex items-center gap-2 text-muted-foreground text-sm">
-          <ArrowDown className="h-4 w-4 animate-bounce" />
-          <span>Scroll to explore</span>
-        </div>
+      </div>
+
+      <div className="absolute bottom-8 left-1/2 -translate-x-1/2 hidden lg:flex items-center gap-2 text-muted-foreground text-sm">
+        <ArrowDown className="h-4 w-4 animate-bounce" />
+        <span>Scroll to explore</span>
       </div>
     </section>
   );
