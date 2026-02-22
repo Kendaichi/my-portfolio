@@ -29,7 +29,7 @@ const SKILLS = [
   },
   {
     category: "Others",
-    items: ["Web3", "Docker"],
+    items: ["Web3", "Docker", "Wordpress"],
   },
 ];
 

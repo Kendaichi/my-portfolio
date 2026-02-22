@@ -39,23 +39,24 @@ export default function HeroSection() {
               variants={item}
               className="text-sm font-mono tracking-widest uppercase text-muted-foreground"
             >
-              Full-Stack Programmer
+              Full-Stack Software Developer
             </motion.p>
             <motion.h1
               variants={item}
               className="text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight leading-[1.1]"
             >
-              Hi, I'm Franclloyd D. Dagdag &<br />
-              I Create Systems
+              Hi, I'm Franclloyd D. Dagdag —<br />
+              Designing Scalable Systems
               <br />
-              <span className="text-gradient">That Scale.</span>
+              <span className="text-gradient">With Precision.</span>
             </motion.h1>
             <motion.p
               variants={item}
               className="text-lg text-muted-foreground max-w-md leading-relaxed"
             >
-              Building robust architectures and elegant solutions for complex
-              problems. From system design to pixel-perfect interfaces.
+              Focused on performance, maintainability, and elegant system
+              design. I create end-to-end solutions that transform complex
+              workflows into efficient digital platforms.
             </motion.p>
             <motion.div variants={item} className="flex flex-wrap gap-4 pt-2">
               <Button variant="hero" size="lg" onClick={scrollToWork}>

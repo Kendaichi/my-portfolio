@@ -1,4 +1,5 @@
 import { Canvas, useFrame } from '@react-three/fiber';
+import { RoundedBox } from '@react-three/drei';
 import * as THREE from 'three';
 import { useRef, useMemo, MutableRefObject } from 'react';
 import {
@@ -11,16 +12,44 @@ import {
 } from '@/lib/cubeState';
 
 const CUBIE_SIZE = 0.88;
+const STICKER_SIZE = 0.71;
+const STICKER_OFFSET = CUBIE_SIZE / 2 + 0.003;
 
-function getCubieFaceColors(ix: number, iy: number, iz: number): string[] {
-  const dark = '#161616';
+// Grayscale palette
+const STICKER_COLORS = {
+  right:  '#B8B8B8',
+  left:   '#5A5A5A',
+  top:    '#D4D4D4',
+  bottom: '#3A3A3A',
+  front:  '#F0F0F0',
+  back:   '#787878',
+};
+
+// Muted, desaturated colors (alternative)
+// const STICKER_COLORS = {
+//   right:  '#7A3535',  // muted red
+//   left:   '#7A5030',  // muted orange
+//   top:    '#BFBBBA',  // warm light gray
+//   bottom: '#7A6E30',  // muted yellow/gold
+//   front:  '#2E4A6E',  // muted blue
+//   back:   '#2E6444',  // muted green
+// };
+
+interface StickerDef {
+  show: boolean;
+  color: string;
+  position: [number, number, number];
+  rotation: [number, number, number];
+}
+
+function getCubieStickers(ix: number, iy: number, iz: number): StickerDef[] {
   return [
-    ix === 1 ? '#B8B8B8' : dark,
-    ix === -1 ? '#5A5A5A' : dark,
-    iy === 1 ? '#D4D4D4' : dark,
-    iy === -1 ? '#3A3A3A' : dark,
-    iz === 1 ? '#F0F0F0' : dark,
-    iz === -1 ? '#787878' : dark,
+    { show: ix === 1,  color: STICKER_COLORS.right,  position: [STICKER_OFFSET, 0, 0],  rotation: [0, Math.PI / 2, 0]  },
+    { show: ix === -1, color: STICKER_COLORS.left,   position: [-STICKER_OFFSET, 0, 0], rotation: [0, -Math.PI / 2, 0] },
+    { show: iy === 1,  color: STICKER_COLORS.top,    position: [0, STICKER_OFFSET, 0],  rotation: [-Math.PI / 2, 0, 0] },
+    { show: iy === -1, color: STICKER_COLORS.bottom, position: [0, -STICKER_OFFSET, 0], rotation: [Math.PI / 2, 0, 0]  },
+    { show: iz === 1,  color: STICKER_COLORS.front,  position: [0, 0, STICKER_OFFSET],  rotation: [0, 0, 0]            },
+    { show: iz === -1, color: STICKER_COLORS.back,   position: [0, 0, -STICKER_OFFSET], rotation: [0, Math.PI, 0]      },
   ];
 }
 
@@ -34,35 +63,41 @@ interface CubeInnerProps {
 
 function CubeInner({ scrollProgress }: CubeInnerProps) {
   const groupRef = useRef<THREE.Group>(null);
-  const cubieRefs = useRef<(THREE.Mesh | null)[]>([]);
+  const cubieRefs = useRef<(THREE.Object3D | null)[]>([]);
 
-  const { scrambledCubies, materials, initialPositions } = useMemo(() => {
+  const { scrambledCubies, initialPositions, bodyMat, stickerMatByColor } = useMemo(() => {
     const cubies = getScrambledCubies();
 
-    const mats: THREE.MeshStandardMaterial[][] = [];
     const initPos: [number, number, number][] = [];
-    let idx = 0;
     for (let x = -1; x <= 1; x++) {
       for (let y = -1; y <= 1; y++) {
         for (let z = -1; z <= 1; z++) {
-          const colors = getCubieFaceColors(x, y, z);
-          mats.push(
-            colors.map(
-              c =>
-                new THREE.MeshStandardMaterial({
-                  color: c,
-                  roughness: 0.92,
-                  metalness: 0.02,
-                })
-            )
-          );
           initPos.push([x, y, z]);
-          idx++;
         }
       }
     }
 
-    return { scrambledCubies: cubies, materials: mats, initialPositions: initPos };
+    const body = new THREE.MeshStandardMaterial({
+      color: '#1A1A1A',
+      roughness: 0.85,
+      metalness: 0.05,
+    });
+
+    const stickerMats: Record<string, THREE.MeshStandardMaterial> = {};
+    for (const color of Object.values(STICKER_COLORS)) {
+      stickerMats[color] = new THREE.MeshStandardMaterial({
+        color,
+        roughness: 0.4,
+        metalness: 0.05,
+      });
+    }
+
+    return {
+      scrambledCubies: cubies,
+      initialPositions: initPos,
+      bodyMat: body,
+      stickerMatByColor: stickerMats,
+    };
   }, []);
 
   const stateRef = useRef<{
@@ -149,19 +184,39 @@ function CubeInner({ scrollProgress }: CubeInnerProps) {
 
   return (
     <group ref={groupRef}>
-      {scrambledCubies.map((_, i) => (
-        <mesh
-          key={i}
-          ref={el => {
-            cubieRefs.current[i] = el;
-          }}
-          material={materials[i]}
-          castShadow
-          receiveShadow
-        >
-          <boxGeometry args={[CUBIE_SIZE, CUBIE_SIZE, CUBIE_SIZE]} />
-        </mesh>
-      ))}
+      {scrambledCubies.map((_, i) => {
+        const [ix, iy, iz] = initialPositions[i];
+        const stickers = getCubieStickers(ix, iy, iz);
+        return (
+          <group
+            key={i}
+            ref={el => {
+              cubieRefs.current[i] = el;
+            }}
+          >
+            <RoundedBox
+              args={[CUBIE_SIZE, CUBIE_SIZE, CUBIE_SIZE]}
+              radius={0.08}
+              smoothness={3}
+              material={bodyMat}
+              castShadow
+              receiveShadow
+            />
+            {stickers
+              .filter(s => s.show)
+              .map((sticker, j) => (
+                <mesh
+                  key={j}
+                  position={sticker.position}
+                  rotation={sticker.rotation}
+                  material={stickerMatByColor[sticker.color]}
+                >
+                  <planeGeometry args={[STICKER_SIZE, STICKER_SIZE]} />
+                </mesh>
+              ))}
+          </group>
+        );
+      })}
     </group>
   );
 }
@@ -178,16 +233,17 @@ export default function CubeCanvas({
       style={{ background: 'transparent' }}
       dpr={[1, 2]}
     >
-      <ambientLight intensity={0.35} />
+      <ambientLight intensity={0.5} />
       <directionalLight
         position={[6, 8, 5]}
-        intensity={0.7}
+        intensity={1.2}
         castShadow
         shadow-mapSize-width={512}
         shadow-mapSize-height={512}
       />
-      <directionalLight position={[-4, -3, -3]} intensity={0.15} />
-      <pointLight position={[0, 0, 6]} intensity={0.1} />
+      <directionalLight position={[-4, 3, -3]} intensity={0.4} />
+      <directionalLight position={[0, -5, 3]} intensity={0.2} />
+      <pointLight position={[0, 0, 6]} intensity={0.3} />
       <CubeInner scrollProgress={scrollProgress} />
     </Canvas>
   );
