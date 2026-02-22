@@ -77,7 +77,7 @@ export default function CustomCursor() {
       {/* Dot — snaps instantly to cursor */}
       <div
         ref={dotRef}
-        className="fixed pointer-events-none z-[9999] w-1.5 h-1.5 rounded-full bg-foreground"
+        className="hidden lg:block fixed pointer-events-none z-[9999] w-1.5 h-1.5 rounded-full bg-foreground"
         style={{
           transform: "translate(-50%, -50%)",
           transition: "opacity 0.15s ease",
@@ -86,7 +86,7 @@ export default function CustomCursor() {
       {/* Ring — lags behind with lerp */}
       <div
         ref={ringRef}
-        className="fixed pointer-events-none z-[9998] w-9 h-9 rounded-full border"
+        className="hidden lg:block fixed pointer-events-none z-[9998] w-9 h-9 rounded-full border"
         style={{
           transform: "translate(-50%, -50%)",
           transition: "transform 0.25s ease-out, border-color 0.2s ease",
