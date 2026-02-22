@@ -4,6 +4,9 @@ import CubeCanvas from "@/components/CubeCanvas";
 import HeroSection from "@/components/HeroSection";
 import Section from "@/components/Section";
 import ContactForm from "@/components/ContactForm";
+import CustomCursor from "@/components/CustomCursor";
+import ParticleBackground from "@/components/ParticleBackground";
+import TiltCard from "@/components/TiltCard";
 import {
   Code2,
   Database,
@@ -96,6 +99,7 @@ const fadeUpItem: Variants = {
 
 export default function Index() {
   const scrollProgress = useRef(0);
+  const mouseRef = useRef({ x: 0, y: 0 });
 
   useEffect(() => {
     const handleScroll = () => {
@@ -107,12 +111,26 @@ export default function Index() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
+  useEffect(() => {
+    const handleMouseMove = (e: MouseEvent) => {
+      mouseRef.current = {
+        x: e.clientX / window.innerWidth - 0.5,
+        y: e.clientY / window.innerHeight - 0.5,
+      };
+    };
+    window.addEventListener("mousemove", handleMouseMove, { passive: true });
+    return () => window.removeEventListener("mousemove", handleMouseMove);
+  }, []);
+
   return (
     <div className="relative bg-background text-foreground">
+      <CustomCursor />
+      <ParticleBackground />
+
       {/* Fixed 3D Canvas */}
       <div className="fixed inset-0 z-0 flex items-center justify-end pointer-events-none">
         <div className="w-full lg:w-1/2 h-full opacity-80">
-          <CubeCanvas scrollProgress={scrollProgress} />
+          <CubeCanvas scrollProgress={scrollProgress} mouseRef={mouseRef} />
         </div>
       </div>
 
@@ -235,39 +253,36 @@ export default function Index() {
             viewport={{ once: true, amount: 0.1 }}
           >
             {PROJECTS.map((project, i) => (
-              <motion.div
-                key={i}
-                variants={fadeUpItem}
-                whileHover={{ scale: 1.01 }}
-                className="rounded-xl bg-card/60 border border-border/30 overflow-hidden hover:border-border/60 transition-colors"
-              >
-                <div className="aspect-[16/9] overflow-hidden">
-                  <img
-                    src={project.image}
-                    alt={project.title}
-                    className="w-full h-full object-cover"
-                    loading="lazy"
-                  />
-                </div>
-                <div className="p-6 space-y-3">
-                  <div className="flex items-center gap-3">
-                    <project.icon className="h-5 w-5 text-muted-foreground" />
-                    <h3 className="text-lg font-semibold">{project.title}</h3>
+              <motion.div key={i} variants={fadeUpItem}>
+                <TiltCard className="rounded-xl bg-card/60 border border-border/30 overflow-hidden hover:border-border/60 transition-colors">
+                  <div className="aspect-[16/9] overflow-hidden">
+                    <img
+                      src={project.image}
+                      alt={project.title}
+                      className="w-full h-full object-cover"
+                      loading="lazy"
+                    />
                   </div>
-                  <p className="text-sm text-muted-foreground leading-relaxed">
-                    {project.description}
-                  </p>
-                  <div className="flex flex-wrap gap-2 pt-1">
-                    {project.tech.map((t) => (
-                      <span
-                        key={t}
-                        className="px-2 py-0.5 text-xs font-mono rounded bg-accent/50 text-muted-foreground"
-                      >
-                        {t}
-                      </span>
-                    ))}
+                  <div className="p-6 space-y-3">
+                    <div className="flex items-center gap-3">
+                      <project.icon className="h-5 w-5 text-muted-foreground" />
+                      <h3 className="text-lg font-semibold">{project.title}</h3>
+                    </div>
+                    <p className="text-sm text-muted-foreground leading-relaxed">
+                      {project.description}
+                    </p>
+                    <div className="flex flex-wrap gap-2 pt-1">
+                      {project.tech.map((t) => (
+                        <span
+                          key={t}
+                          className="px-2 py-0.5 text-xs font-mono rounded bg-accent/50 text-muted-foreground"
+                        >
+                          {t}
+                        </span>
+                      ))}
+                    </div>
                   </div>
-                </div>
+                </TiltCard>
               </motion.div>
             ))}
           </motion.div>
