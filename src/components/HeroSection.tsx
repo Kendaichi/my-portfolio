@@ -1,7 +1,15 @@
-import { motion, Variants } from "framer-motion";
+import { useState, useEffect } from "react";
+import { motion, AnimatePresence, Variants } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { ArrowDown } from "lucide-react";
-import portraitPlaceholder from "@/assets/portrait-placeholder.jpg";
+
+const TITLES = [
+  "A Full-Stack Developer.",
+  "A Systems Architect.",
+  "A Problem Solver.",
+  "A Digital Craftsman.",
+  "A Critical Thinker.",
+];
 
 const container: Variants = {
   hidden: {},
@@ -13,7 +21,21 @@ const item: Variants = {
   visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: "easeOut" } },
 };
 
+const titleEnter: Variants = {
+  hidden: { opacity: 0, y: 20 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.5, ease: "easeOut" } },
+};
+
 export default function HeroSection() {
+  const [titleIndex, setTitleIndex] = useState(0);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setTitleIndex((prev) => (prev + 1) % TITLES.length);
+    }, 2800);
+    return () => clearInterval(interval);
+  }, []);
+
   const scrollToWork = () => {
     document.getElementById("projects")?.scrollIntoView({ behavior: "smooth" });
   };
@@ -41,15 +63,34 @@ export default function HeroSection() {
             >
               Full-Stack Software Developer
             </motion.p>
-            <motion.h1
-              variants={item}
-              className="text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight leading-[1.1]"
-            >
-              Hi, I'm Franclloyd D. Dagdag —<br />
-              Designing Scalable Systems
-              <br />
-              <span className="text-gradient">With Precision.</span>
-            </motion.h1>
+
+            {/* Name + cycling title — grouped so space-y-6 doesn't split them */}
+            <motion.div variants={item} className="space-y-1">
+              <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight leading-[1.2]">
+                Hi, I'm Franclloyd D. Dagdag,
+              </h1>
+
+              {/* Responsive height matches text-xl / text-3xl / text-4xl * leading-1.2 */}
+              <div className="overflow-hidden h-6 sm:h-9 lg:h-11">
+                <AnimatePresence mode="wait">
+                  <motion.p
+                    key={titleIndex}
+                    variants={titleEnter}
+                    initial="hidden"
+                    animate="visible"
+                    exit={{
+                      opacity: 0,
+                      y: -16,
+                      transition: { duration: 0.3, ease: "easeIn" },
+                    }}
+                    className="text-xl sm:text-3xl lg:text-4xl font-bold tracking-tight text-gradient leading-[1.2]"
+                  >
+                    {TITLES[titleIndex]}
+                  </motion.p>
+                </AnimatePresence>
+              </div>
+            </motion.div>
+
             <motion.p
               variants={item}
               className="text-lg text-muted-foreground max-w-md leading-relaxed"
@@ -67,16 +108,6 @@ export default function HeroSection() {
               </Button>
             </motion.div>
           </div>
-
-          {/* <motion.div variants={item} className="shrink-0">
-            <div className="w-32 h-32 sm:w-40 sm:h-40 rounded-2xl overflow-hidden border border-border/40 bg-card">
-              <img
-                src={portraitPlaceholder}
-                alt="Portrait"
-                className="w-full h-full object-cover"
-              />
-            </div>
-          </motion.div> */}
         </motion.div>
       </div>
 
