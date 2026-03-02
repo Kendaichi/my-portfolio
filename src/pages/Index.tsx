@@ -23,7 +23,7 @@ import projectInternalAudit from "@/assets/project-internal-audit.png";
 const SKILLS = [
   {
     category: "Frontend",
-    items: ["React", "Shadcn", "Tailwind CSS", "Flutter"],
+    items: ["React", "Shadcn", "Tailwind CSS", "Flutter", "NextJS"],
   },
   { category: "Backend", items: ["Node.js", "Python", "Laravel"] },
   {
@@ -32,7 +32,7 @@ const SKILLS = [
   },
   {
     category: "Others",
-    items: ["Web3", "Docker", "Wordpress"],
+    items: ["Web3", "Docker", "Wordpress", "SEO Optimization"],
   },
 ];
 
