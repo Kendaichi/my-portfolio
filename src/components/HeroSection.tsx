@@ -61,7 +61,7 @@ export default function HeroSection() {
               variants={item}
               className="text-sm font-mono tracking-widest uppercase text-muted-foreground"
             >
-              Full-Stack Software Developer
+              Full-Stack Web Developer
             </motion.p>
 
             {/* Name + cycling title — grouped so space-y-6 doesn't split them */}
