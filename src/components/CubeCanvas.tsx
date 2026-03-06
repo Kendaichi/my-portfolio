@@ -1,7 +1,7 @@
-import { Canvas, useFrame } from "@react-three/fiber";
+import { Canvas, useFrame, useThree } from "@react-three/fiber";
 import { RoundedBox } from "@react-three/drei";
 import * as THREE from "three";
-import { useRef, useMemo, MutableRefObject } from "react";
+import { useRef, useMemo, useEffect, MutableRefObject } from "react";
 import {
   getScrambledCubies,
   SOLVE_MOVES,
@@ -85,6 +85,36 @@ function getCubieStickers(ix: number, iy: number, iz: number): StickerDef[] {
 
 function easeInOutCubic(t: number): number {
   return t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
+}
+
+// Adjusts camera z and fov based on the actual canvas aspect ratio so the
+// cube stays fully visible at all sizes. Uses R3F's `size` which updates
+// automatically whenever the canvas container resizes (including rotation).
+function CameraController() {
+  const { camera, size } = useThree();
+
+  useEffect(() => {
+    const cam = camera as THREE.PerspectiveCamera;
+    const aspect = size.width / size.height;
+
+    if (aspect < 0.5) {
+      // Very tall/narrow canvas (e.g. portrait tablet at full height)
+      cam.position.z = 13;
+      cam.fov = 52;
+    } else if (aspect < 0.75) {
+      // Moderately tall canvas
+      cam.position.z = 10;
+      cam.fov = 45;
+    } else {
+      // Square or wider canvas — mobile with aspect-square fix lands here
+      cam.position.z = 7.5;
+      cam.fov = 40;
+    }
+
+    cam.updateProjectionMatrix();
+  }, [camera, size]); // re-runs whenever canvas dimensions change
+
+  return null;
 }
 
 interface CubeInnerProps {
@@ -275,6 +305,7 @@ export default function CubeCanvas({
       onCreated={({ gl }) => gl.setClearColor(0x000000, 0)}
       dpr={[1, 2]}
     >
+      <CameraController />
       <ambientLight intensity={0.5} />
       <directionalLight
         position={[6, 8, 5]}

@@ -5,7 +5,7 @@ import HeroSection from "@/components/HeroSection";
 import Section from "@/components/Section";
 import ContactForm from "@/components/ContactForm";
 import CustomCursor from "@/components/CustomCursor";
-import ParticleBackground from "@/components/ParticleBackground";
+import RobotParticleBackground from "@/components/RobotParticleBackground";
 import TiltCard from "@/components/TiltCard";
 import {
   Code2,
@@ -23,7 +23,7 @@ import projectInternalAudit from "@/assets/project-internal-audit.png";
 const SKILLS = [
   {
     category: "Frontend",
-    items: ["React", "Shadcn", "Tailwind CSS", "Flutter", "NextJS"],
+    items: ["React", "NextJS", "Shadcn", "Tailwind CSS", "Flutter"],
   },
   { category: "Backend", items: ["Node.js", "Python", "Laravel"] },
   {
@@ -32,7 +32,7 @@ const SKILLS = [
   },
   {
     category: "Others",
-    items: ["Web3", "Docker", "Wordpress", "SEO Optimization"],
+    items: ["Web3", "Docker", "Wordpress", "SEO"],
   },
 ];
 
@@ -125,14 +125,20 @@ export default function Index() {
   return (
     <div className="relative bg-background text-foreground">
       <CustomCursor />
-      <ParticleBackground scrollProgress={scrollProgress} mouseRef={mouseRef} />
+      <RobotParticleBackground
+        scrollProgress={scrollProgress}
+        mouseRef={mouseRef}
+      />
 
       {/* Dark overlay between robot and cube */}
       <div className="fixed inset-0 z-[7] pointer-events-none bg-black/25" />
 
       {/* Fixed 3D Canvas */}
-      <div className="fixed inset-0 z-[10] flex items-center justify-end pointer-events-none">
-        <div className="w-full lg:w-1/2 h-full">
+      <div className="fixed inset-0 z-[10] flex items-center justify-center pointer-events-none sm:justify-end">
+        {/* Mobile: square canvas so the cube has a proper aspect ratio and sits between
+            the audience robots (top) and the podium robots (bottom).
+            sm+: full-height panel on the right, same as before. */}
+        <div className="w-1/2 aspect-square sm:aspect-auto sm:h-full">
           <CubeCanvas scrollProgress={scrollProgress} mouseRef={mouseRef} />
         </div>
       </div>
