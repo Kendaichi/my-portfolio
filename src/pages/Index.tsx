@@ -125,21 +125,27 @@ export default function Index() {
   return (
     <div className="relative bg-background text-foreground">
       <CustomCursor />
-      <ParticleBackground />
+      <ParticleBackground scrollProgress={scrollProgress} mouseRef={mouseRef} />
+
+      {/* Dark overlay between robot and cube */}
+      <div className="fixed inset-0 z-[7] pointer-events-none bg-black/25" />
 
       {/* Fixed 3D Canvas */}
-      <div className="fixed inset-0 z-0 flex items-center justify-end pointer-events-none">
-        <div className="w-full lg:w-1/2 h-full opacity-80">
+      <div className="fixed inset-0 z-[10] flex items-center justify-end pointer-events-none">
+        <div className="w-full lg:w-1/2 h-full">
           <CubeCanvas scrollProgress={scrollProgress} mouseRef={mouseRef} />
         </div>
       </div>
 
       {/* Gradient overlays for readability */}
-      <div className="fixed inset-0 z-[1] pointer-events-none bg-gradient-to-r from-background via-background/80 to-transparent lg:via-background/60" />
-      <div className="fixed inset-0 z-[1] pointer-events-none bg-gradient-to-t from-background/40 via-transparent to-background/40" />
+      <div className="fixed inset-0 z-[1] pointer-events-none bg-gradient-to-r from-background/70 via-background/30 to-transparent lg:via-background/20" />
+      <div className="fixed inset-0 z-[1] pointer-events-none bg-gradient-to-t from-background/25 via-transparent to-background/25" />
+
+      {/* Dark overlay between cube (z-10) and text (z-20) */}
+      <div className="fixed inset-0 z-[15] pointer-events-none bg-black/30" />
 
       {/* Scrollable Content */}
-      <main className="relative z-[2]">
+      <main className="relative z-[20]">
         <HeroSection />
 
         <Section id="about" title="About" subtitle="01">

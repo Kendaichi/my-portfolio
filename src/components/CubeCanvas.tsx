@@ -272,6 +272,7 @@ export default function CubeCanvas({
       camera={{ position: [0, 0, 7.5], fov: 40 }}
       gl={{ alpha: true, antialias: true, powerPreference: "high-performance" }}
       style={{ background: "transparent" }}
+      onCreated={({ gl }) => gl.setClearColor(0x000000, 0)}
       dpr={[1, 2]}
     >
       <ambientLight intensity={0.5} />
