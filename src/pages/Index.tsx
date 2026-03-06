@@ -319,13 +319,13 @@ export default function Index() {
                 </p>
                 <div className="space-y-4">
                   <a
-                    href="mailto:franclloyddagdag2130@gmail.com"
+                    href="mailto:franclloyd.dagdag@daggerbuilds.com"
                     className="flex items-center gap-3 text-sm text-foreground/80 hover:text-foreground transition-colors group"
                   >
                     <span className="w-8 h-8 rounded-full border border-border/40 flex items-center justify-center text-xs group-hover:border-foreground/40 transition-colors">
                       @
                     </span>
-                    <span>franclloyddagdag2130@gmail.com</span>
+                    <span>franclloyd.dagdag@daggerbuilds.com</span>
                   </a>
                 </div>
               </div>
@@ -388,7 +388,7 @@ export default function Index() {
             <div className="flex flex-col items-center sm:items-start gap-1">
               <p>© 2026 — Engineered with precision.</p>
               <a
-                href="mailto:franclloyddagdag2130@gmail.com"
+                href="mailto:franclloyd.dagdag@daggerbuilds.com"
                 className="hover:text-foreground transition-colors text-xs"
               >
                 franclloyd.dagdag@daggerbuilds.com
