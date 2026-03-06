@@ -138,7 +138,7 @@ export default function Index() {
         {/* Mobile: square canvas so the cube has a proper aspect ratio and sits between
             the audience robots (top) and the podium robots (bottom).
             sm+: full-height panel on the right, same as before. */}
-        <div className="w-1/2 aspect-square sm:aspect-auto sm:h-full">
+        <div className="w-4/5 aspect-square sm:w-1/2 sm:aspect-auto sm:h-full">
           <CubeCanvas scrollProgress={scrollProgress} mouseRef={mouseRef} />
         </div>
       </div>

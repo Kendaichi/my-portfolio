@@ -41,6 +41,8 @@ interface Robot {
   headRotation: number;
   headFlip: boolean;
   lookBias: number;
+  // Random vertical offset applied only on mobile to break the "mountain" look
+  yScatter: number;
 }
 
 const PARTICLE_COUNT = 60;
@@ -606,6 +608,9 @@ export default function RobotParticleBackground({
           headRotation,
           headFlip,
           lookBias,
+          // Audience robots get a random vertical scatter for mobile;
+          // podium robots stay anchored to the ground line.
+          yScatter: podiumRank !== null ? 0 : (Math.random() - 0.5) * 0.18,
         };
       }
     );
@@ -670,12 +675,13 @@ export default function RobotParticleBackground({
         const hh = 24 * effectiveScale;
         const hw = 30 * effectiveScale;
         const robotX = (robot.xPct + xOffset) * width;
+        const mobileScatter = width < 640 ? robot.yScatter : 0;
         const robotY =
           robot.podiumRank !== null
             ? height * GROUND_PCT -
               PLATFORM_H_UNITS[robot.podiumRank] * effectiveScale -
               hh
-            : robot.yPct * height;
+            : (robot.yPct + mobileScatter) * height;
 
         // Look direction
         const eyeAbsY = robotY - hh * 0.1;
