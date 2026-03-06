@@ -306,35 +306,124 @@ export default function Index() {
         </Section>
 
         <Section id="contact" title="Let's Connect" subtitle="06">
-          <p className="text-muted-foreground mb-8 max-w-md">
+          <p className="text-muted-foreground mb-8 max-w-xl">
             Have a project in mind or want to discuss an opportunity? I'd love
             to hear from you.
           </p>
-          <ContactForm />
+          <div className="flex flex-col lg:flex-row gap-12">
+            {/* Contact Details */}
+            <div className="flex flex-col gap-6 min-w-[220px]">
+              <div>
+                <p className="text-xs uppercase tracking-widest text-muted-foreground mb-3">
+                  Contact
+                </p>
+                <div className="space-y-4">
+                  <a
+                    href="mailto:franclloyddagdag2130@gmail.com"
+                    className="flex items-center gap-3 text-sm text-foreground/80 hover:text-foreground transition-colors group"
+                  >
+                    <span className="w-8 h-8 rounded-full border border-border/40 flex items-center justify-center text-xs group-hover:border-foreground/40 transition-colors">
+                      @
+                    </span>
+                    <span>franclloyddagdag2130@gmail.com</span>
+                  </a>
+                </div>
+              </div>
+              <div>
+                <p className="text-xs uppercase tracking-widest text-muted-foreground mb-3">
+                  Profiles
+                </p>
+                <div className="space-y-3">
+                  <a
+                    href="https://github.com/Kendaichi"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center gap-3 text-sm text-foreground/80 hover:text-foreground transition-colors group"
+                  >
+                    <span className="w-8 h-8 rounded-full border border-border/40 flex items-center justify-center text-xs group-hover:border-foreground/40 transition-colors">
+                      GH
+                    </span>
+                    <span>github.com/Kendaichi</span>
+                  </a>
+                  <a
+                    href="https://ph.linkedin.com/in/franclloyd-dagdag"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center gap-3 text-sm text-foreground/80 hover:text-foreground transition-colors group"
+                  >
+                    <span className="w-8 h-8 rounded-full border border-border/40 flex items-center justify-center text-xs group-hover:border-foreground/40 transition-colors">
+                      in
+                    </span>
+                    <span>franclloyd-dagdag</span>
+                  </a>
+                  <a
+                    href="https://www.facebook.com/franclloyd.dagdag"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center gap-3 text-sm text-foreground/80 hover:text-foreground transition-colors group"
+                  >
+                    <span className="w-8 h-8 rounded-full border border-border/40 flex items-center justify-center text-xs group-hover:border-foreground/40 transition-colors">
+                      fb
+                    </span>
+                    <span>franclloyd.dagdag</span>
+                  </a>
+                </div>
+              </div>
+            </div>
+
+            {/* Divider */}
+            <div className="hidden lg:block w-px bg-border/20 self-stretch" />
+            <div className="lg:hidden h-px bg-border/20 w-full" />
+
+            {/* Contact Form */}
+            <div className="flex-1">
+              <ContactForm />
+            </div>
+          </div>
         </Section>
 
         {/* Footer */}
         <footer className="relative z-10 border-t border-border/20 py-8">
           <div className="container max-w-3xl flex flex-col sm:flex-row items-center justify-between gap-4 text-sm text-muted-foreground">
-            <p>© 2026 — Engineered with precision.</p>
+            <div className="flex flex-col items-center sm:items-start gap-1">
+              <p>© 2026 — Engineered with precision.</p>
+              <a
+                href="mailto:franclloyddagdag2130@gmail.com"
+                className="hover:text-foreground transition-colors text-xs"
+              >
+                franclloyd.dagdag@daggerbuilds.com
+              </a>
+            </div>
             <div className="flex gap-6">
               <a
                 href="https://github.com/Kendaichi"
+                target="_blank"
+                rel="noopener noreferrer"
                 className="hover:text-foreground transition-colors"
               >
                 GitHub
               </a>
               <a
                 href="https://ph.linkedin.com/in/franclloyd-dagdag"
+                target="_blank"
+                rel="noopener noreferrer"
                 className="hover:text-foreground transition-colors"
               >
                 LinkedIn
               </a>
               <a
                 href="https://www.facebook.com/franclloyd.dagdag"
+                target="_blank"
+                rel="noopener noreferrer"
                 className="hover:text-foreground transition-colors"
               >
                 Facebook
+              </a>
+              <a
+                href="mailto:franclloyd.dagdag@daggerbuilds.com"
+                className="hover:text-foreground transition-colors"
+              >
+                Email
               </a>
             </div>
           </div>

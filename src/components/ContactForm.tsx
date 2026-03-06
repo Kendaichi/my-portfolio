@@ -41,7 +41,7 @@ export default function ContactForm() {
   };
 
   return (
-    <form onSubmit={handleSubmit} className="space-y-5 max-w-lg">
+    <form onSubmit={handleSubmit} className="space-y-5 w-full">
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
         <Input
           name="name"
@@ -49,7 +49,7 @@ export default function ContactForm() {
           value={form.name}
           onChange={handleChange}
           required
-          className="bg-card border-border/50 focus:border-foreground/30"
+          className="bg-card border-border/50 focus:border-foreground/30 h-12 text-base"
         />
         <Input
           name="email"
@@ -58,17 +58,17 @@ export default function ContactForm() {
           value={form.email}
           onChange={handleChange}
           required
-          className="bg-card border-border/50 focus:border-foreground/30"
+          className="bg-card border-border/50 focus:border-foreground/30 h-12 text-base"
         />
       </div>
       <Textarea
         name="message"
         placeholder="Tell me about your project..."
-        rows={5}
+        rows={8}
         value={form.message}
         onChange={handleChange}
         required
-        className="bg-card border-border/50 focus:border-foreground/30 resize-none"
+        className="bg-card border-border/50 focus:border-foreground/30 resize-none text-base"
       />
       <Button variant="hero" size="lg" type="submit" disabled={loading} className="gap-2">
         {loading ? 'Sending...' : "Let's Build Something"}
