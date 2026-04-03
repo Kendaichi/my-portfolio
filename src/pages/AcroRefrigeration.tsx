@@ -16,6 +16,9 @@ import {
 } from "lucide-react";
 import CustomCursor from "@/components/CustomCursor";
 import solutionImg from "@/assets/acro/new-website.webp";
+import challengeimg from "@/assets/acro/old-website.webp";
+import oldPerfImg from "@/assets/acro/old-website-performance-assessment.webp";
+import newPerfImg from "@/assets/acro/new-website-performance-assessment.webp";
 
 /* ── animation variants ─────────────────────────────────────── */
 
@@ -87,8 +90,8 @@ function ScrapbookImage({
     rotate === "left"
       ? "-rotate-[2deg]"
       : rotate === "right"
-        ? "rotate-[1.8deg]"
-        : "";
+      ? "rotate-[1.8deg]"
+      : "";
 
   return (
     <div className={`relative ${rotateClass} group`}>
@@ -161,7 +164,7 @@ function StickyNote({
 
 export default function AcroRefrigeration() {
   /* image state — allows user to upload/set images later */
-  const [challengeImage] = useState<string | undefined>(undefined);
+  const [challengeImage] = useState<string | undefined>(challengeimg);
   const [solutionImage] = useState<string | undefined>(solutionImg);
 
   return (
@@ -197,17 +200,25 @@ export default function AcroRefrigeration() {
           initial="hidden"
           animate="visible"
         >
-          <motion.div variants={fadeUp} className="flex flex-wrap items-center gap-3 mb-6">
-            {["Next.js", "TypeScript", "Supabase", "Vercel", "Custom CMS", "SEO"].map(
-              (tag) => (
-                <span
-                  key={tag}
-                  className="px-2.5 py-1 text-xs font-mono rounded bg-accent/50 text-muted-foreground border border-border/30"
-                >
-                  {tag}
-                </span>
-              )
-            )}
+          <motion.div
+            variants={fadeUp}
+            className="flex flex-wrap items-center gap-3 mb-6"
+          >
+            {[
+              "Next.js",
+              "TypeScript",
+              "Supabase",
+              "Vercel",
+              "Custom CMS",
+              "SEO",
+            ].map((tag) => (
+              <span
+                key={tag}
+                className="px-2.5 py-1 text-xs font-mono rounded bg-accent/50 text-muted-foreground border border-border/30"
+              >
+                {tag}
+              </span>
+            ))}
           </motion.div>
 
           <motion.p
@@ -273,26 +284,26 @@ export default function AcroRefrigeration() {
               </h2>
             </motion.div>
 
-            <motion.div variants={fadeUp} className="space-y-5 text-muted-foreground leading-relaxed max-w-2xl mb-12">
+            <motion.div
+              variants={fadeUp}
+              className="space-y-5 text-muted-foreground leading-relaxed max-w-2xl mb-12"
+            >
               <p className="text-lg text-foreground/90">
-                With over 50 years in the refrigeration industry, Acro Refrigeration
-                had built a rock-solid reputation across Australia. But their
-                website hadn't kept up with the business.
+                With over 50 years in the refrigeration industry, Acro
+                Refrigeration had built a rock-solid reputation across
+                Australia. But their website hadn't kept up with the business.
               </p>
               <p>
-                The WordPress site had become more of a burden than an asset — pages
-                loaded at a crawl, the design felt outdated, and every small change
-                meant wrestling with plugins and maintenance. Worse, when they wanted
-                to add features or functionality to support their operations,
-                WordPress simply couldn't deliver.
+                The WordPress site had become more of a burden than an asset —
+                pages loaded at a crawl, the design felt outdated, and every
+                small change meant wrestling with plugins and maintenance.
+                Worse, when they wanted to add features or functionality to
+                support their operations, WordPress simply couldn't deliver.
               </p>
             </motion.div>
 
             {/* ── Scrapbook: Problem Evidence ── */}
-            <motion.div
-              variants={fadeUp}
-              className="relative"
-            >
+            <motion.div variants={fadeUp} className="relative">
               {/* The main problem image — tilted like a photo pinned to a board */}
               <motion.div
                 variants={tiltLeft}
@@ -304,7 +315,7 @@ export default function AcroRefrigeration() {
                 <ScrapbookImage
                   src={challengeImage}
                   alt="Screenshot: Old Acro Refrigeration website — slow load times & outdated design"
-                  caption="The old site — 8+ second load times on mobile"
+                  caption="The old site — 15+ second load times on mobile"
                   rotate="left"
                   tapePosition="corner"
                 />
@@ -320,10 +331,12 @@ export default function AcroRefrigeration() {
                 >
                   <StickyNote color="pink" rotate={-2.5}>
                     <Gauge className="h-5 w-5 text-pink-400/60 mb-2" />
-                    <p className="text-sm font-semibold text-foreground/80 mb-1">Painfully Slow</p>
+                    <p className="text-sm font-semibold text-foreground/80 mb-1">
+                      Painfully Slow
+                    </p>
                     <p className="text-xs text-muted-foreground leading-relaxed">
-                      8+ second load times. Bloated plugins and unoptimized images
-                      were dragging the entire experience down.
+                      8+ second load times. Bloated plugins and unoptimized
+                      images were dragging the entire experience down.
                     </p>
                   </StickyNote>
                 </motion.div>
@@ -336,10 +349,13 @@ export default function AcroRefrigeration() {
                 >
                   <StickyNote color="yellow" rotate={1.5}>
                     <PenTool className="h-5 w-5 text-yellow-400/60 mb-2" />
-                    <p className="text-sm font-semibold text-foreground/80 mb-1">Dated Design</p>
+                    <p className="text-sm font-semibold text-foreground/80 mb-1">
+                      Dated Design
+                    </p>
                     <p className="text-xs text-muted-foreground leading-relaxed">
-                      After 50+ years building their reputation, the visual identity
-                      online hadn't been refreshed to match the caliber of their work.
+                      After 50+ years building their reputation, the visual
+                      identity online hadn't been refreshed to match the caliber
+                      of their work.
                     </p>
                   </StickyNote>
                 </motion.div>
@@ -352,7 +368,9 @@ export default function AcroRefrigeration() {
                 >
                   <StickyNote color="blue" rotate={-1}>
                     <AlertTriangle className="h-5 w-5 text-blue-400/60 mb-2" />
-                    <p className="text-sm font-semibold text-foreground/80 mb-1">Maintenance Overhead</p>
+                    <p className="text-sm font-semibold text-foreground/80 mb-1">
+                      Maintenance Overhead
+                    </p>
                     <p className="text-xs text-muted-foreground leading-relaxed">
                       Constant plugin updates, security patches, hosting fees —
                       all just to keep the lights on, with no room to build the
@@ -389,15 +407,18 @@ export default function AcroRefrigeration() {
               </h2>
             </motion.div>
 
-            <motion.div variants={fadeUp} className="space-y-5 text-muted-foreground leading-relaxed max-w-2xl mb-12">
+            <motion.div
+              variants={fadeUp}
+              className="space-y-5 text-muted-foreground leading-relaxed max-w-2xl mb-12"
+            >
               <p className="text-lg text-foreground/90">
-                Rebuilding from scratch sounds simple — until you realize the old
-                site is already ranking on Google, has years of indexed blog content,
-                and the client needs to edit pages themselves.
+                Rebuilding from scratch sounds simple — until you realize the
+                old site is already ranking on Google, has years of indexed blog
+                content, and the client needs to edit pages themselves.
               </p>
               <p>
-                This wasn't just a redesign. It was a migration under live traffic,
-                with zero room for SEO regression.
+                This wasn't just a redesign. It was a migration under live
+                traffic, with zero room for SEO regression.
               </p>
             </motion.div>
 
@@ -420,10 +441,10 @@ export default function AcroRefrigeration() {
                       <h3 className="text-lg font-semibold">SEO at Stake</h3>
                     </div>
                     <p className="text-sm text-muted-foreground leading-relaxed">
-                      The existing site was already ranking for key refrigeration
-                      service terms across Australia. A careless migration could tank
-                      their search visibility overnight — and with it, their primary
-                      lead generation channel.
+                      The existing site was already ranking for key
+                      refrigeration service terms across Australia. A careless
+                      migration could tank their search visibility overnight —
+                      and with it, their primary lead generation channel.
                     </p>
                     {/* Decorative pin */}
                     <div className="absolute -top-2 right-6 w-4 h-4 rounded-full bg-red-500/20 border-2 border-red-500/40 shadow-sm" />
@@ -445,10 +466,10 @@ export default function AcroRefrigeration() {
                       <h3 className="text-lg font-semibold">100+ Blog Posts</h3>
                     </div>
                     <p className="text-sm text-muted-foreground leading-relaxed">
-                      Years of content — service guides, industry insights, how-to
-                      articles — all trapped inside WordPress. Each post was a
-                      ranking asset. Losing even one meant losing organic traffic
-                      they'd spent years building.
+                      Years of content — service guides, industry insights,
+                      how-to articles — all trapped inside WordPress. Each post
+                      was a ranking asset. Losing even one meant losing organic
+                      traffic they'd spent years building.
                     </p>
                     <div className="absolute -top-2 right-6 w-4 h-4 rounded-full bg-blue-500/20 border-2 border-blue-500/40 shadow-sm" />
                   </div>
@@ -469,9 +490,10 @@ export default function AcroRefrigeration() {
                       <h3 className="text-lg font-semibold">Client Autonomy</h3>
                     </div>
                     <p className="text-sm text-muted-foreground leading-relaxed">
-                      The Acro team needed to update content — new services, seasonal
-                      promos, blog posts — without calling a developer every time. Any
-                      solution had to put editing power directly in their hands.
+                      The Acro team needed to update content — new services,
+                      seasonal promos, blog posts — without calling a developer
+                      every time. Any solution had to put editing power directly
+                      in their hands.
                     </p>
                     <div className="absolute -top-2 right-6 w-4 h-4 rounded-full bg-green-500/20 border-2 border-green-500/40 shadow-sm" />
                   </div>
@@ -518,11 +540,14 @@ export default function AcroRefrigeration() {
               </h2>
             </motion.div>
 
-            <motion.div variants={fadeUp} className="space-y-5 text-muted-foreground leading-relaxed max-w-2xl mb-12">
+            <motion.div
+              variants={fadeUp}
+              className="space-y-5 text-muted-foreground leading-relaxed max-w-2xl mb-12"
+            >
               <p className="text-lg text-foreground/90">
                 I chose a stack built for speed, scalability, and developer
-                experience — then wrapped it in a custom CMS so the client
-                could own their content without touching code.
+                experience — then wrapped it in a custom CMS so the client could
+                own their content without touching code.
               </p>
             </motion.div>
 
@@ -603,10 +628,11 @@ export default function AcroRefrigeration() {
                   WordPress-to-Supabase Migration
                 </h3>
                 <p className="text-sm text-muted-foreground leading-relaxed pl-8">
-                  I wasn't going to let years of content go to waste. Every single blog
-                  post — formatting, images, metadata, and URLs — was carefully migrated
-                  from WordPress into Supabase. The content lived on, now powered by a
-                  faster, more flexible backend. No broken links. No lost rankings.
+                  I wasn't going to let years of content go to waste. Every
+                  single blog post — formatting, images, metadata, and URLs —
+                  was carefully migrated from WordPress into Supabase. The
+                  content lived on, now powered by a faster, more flexible
+                  backend. No broken links. No lost rankings.
                 </p>
               </motion.div>
 
@@ -616,10 +642,13 @@ export default function AcroRefrigeration() {
                   SEO-First Architecture
                 </h3>
                 <p className="text-sm text-muted-foreground leading-relaxed pl-8">
-                  Every page was built with structured metadata, semantic HTML, proper
-                  heading hierarchies, and optimized Core Web Vitals. URL structures were
-                  preserved or 301-redirected to maintain link equity. The speed improvement
-                  alone — from 8+ seconds to under 1 — sent a powerful signal to Google.
+                  Every page was built with structured metadata, semantic HTML,
+                  proper heading hierarchies, and optimized Core Web Vitals. I
+                  set up 301 redirects across all legacy URLs to preserve link
+                  equity, generated a comprehensive XML sitemap, and configured
+                  Google Search Console to monitor indexing and ensure a smooth
+                  transition. The speed improvement alone — from 8+ seconds to
+                  under 1 — sent a powerful signal to Google.
                 </p>
               </motion.div>
 
@@ -629,10 +658,11 @@ export default function AcroRefrigeration() {
                   Custom CMS for Non-Technical Users
                 </h3>
                 <p className="text-sm text-muted-foreground leading-relaxed pl-8">
-                  Instead of forcing the client onto another third-party platform, I built
-                  a CMS tailored to exactly how the Acro team works. They can update service
-                  pages, publish new blog posts, manage images, and edit site content — all
-                  through a clean, intuitive interface designed specifically for them.
+                  Instead of forcing the client onto another third-party
+                  platform, I built a CMS tailored to exactly how the Acro team
+                  works. They can update service pages, publish new blog posts,
+                  manage images, and edit site content — all through a clean,
+                  intuitive interface designed specifically for them.
                 </p>
               </motion.div>
             </motion.div>
@@ -672,10 +702,26 @@ export default function AcroRefrigeration() {
               className="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-12"
             >
               {[
-                { metric: "~10x", label: "Faster Load Time", sublabel: "8s → <1s" },
-                { metric: "100%", label: "Content Migrated", sublabel: "Zero posts lost" },
-                { metric: "0", label: "SEO Rankings Lost", sublabel: "Seamless transition" },
-                { metric: "Full", label: "Client Control", sublabel: "Custom CMS" },
+                {
+                  metric: "~10x",
+                  label: "Faster Load Time",
+                  sublabel: "15s → <2s",
+                },
+                {
+                  metric: "100%",
+                  label: "Content Migrated",
+                  sublabel: "Zero posts lost",
+                },
+                {
+                  metric: "0",
+                  label: "SEO Rankings Lost",
+                  sublabel: "Seamless transition",
+                },
+                {
+                  metric: "Full",
+                  label: "Client Control",
+                  sublabel: "Custom CMS",
+                },
               ].map(({ metric, label, sublabel }, i) => (
                 <motion.div
                   key={label}
@@ -683,15 +729,59 @@ export default function AcroRefrigeration() {
                   className="bg-card/60 border border-border/30 rounded-lg p-5 text-center space-y-1"
                   style={{ transform: `rotate(${i % 2 === 0 ? -1 : 1}deg)` }}
                 >
-                  <p className="text-2xl sm:text-3xl font-bold tracking-tight">{metric}</p>
-                  <p className="text-sm font-semibold text-foreground/80">{label}</p>
+                  <p className="text-2xl sm:text-3xl font-bold tracking-tight">
+                    {metric}
+                  </p>
+                  <p className="text-sm font-semibold text-foreground/80">
+                    {label}
+                  </p>
                   <p className="text-xs text-muted-foreground">{sublabel}</p>
                 </motion.div>
               ))}
             </motion.div>
 
+            {/* ── Performance Before & After ── */}
+            <motion.div variants={fadeUp} className="mb-12">
+              <h3 className="text-lg font-semibold mb-6 text-center">
+                PageSpeed Insights — Before & After
+              </h3>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <motion.div
+                  variants={tiltLeft}
+                  initial="hidden"
+                  whileInView="visible"
+                  viewport={{ once: true }}
+                >
+                  <ScrapbookImage
+                    src={oldPerfImg}
+                    alt="Old website performance assessment — Performance: 40, Accessibility: 91, Best Practices: 77, SEO: 85"
+                    caption="Before — Feb 28, 2026"
+                    rotate="left"
+                    tapePosition="corner"
+                  />
+                </motion.div>
+                <motion.div
+                  variants={tiltRight}
+                  initial="hidden"
+                  whileInView="visible"
+                  viewport={{ once: true }}
+                >
+                  <ScrapbookImage
+                    src={newPerfImg}
+                    alt="New website performance assessment — Performance: 93, Accessibility: 96, Best Practices: 100, SEO: 100"
+                    caption="After — Apr 4, 2026"
+                    rotate="right"
+                    tapePosition="corner"
+                  />
+                </motion.div>
+              </div>
+            </motion.div>
+
             {/* ── Result Summary ── */}
-            <motion.div variants={fadeUp} className="space-y-5 text-muted-foreground leading-relaxed max-w-2xl mb-12">
+            <motion.div
+              variants={fadeUp}
+              className="space-y-5 text-muted-foreground leading-relaxed max-w-2xl mb-12"
+            >
               <p className="text-lg text-foreground/90">
                 The new Acro Refrigeration website isn't just faster — it's a
                 fundamentally better business tool.
@@ -704,8 +794,9 @@ export default function AcroRefrigeration() {
               </p>
               <p>
                 The improved Core Web Vitals and page speed sent a clear signal
-                to Google — and combined with the SEO-optimized content architecture,
-                the site is now positioned to rank even higher than before.
+                to Google — and combined with the SEO-optimized content
+                architecture, the site is now positioned to rank even higher
+                than before.
               </p>
             </motion.div>
 
@@ -718,12 +809,14 @@ export default function AcroRefrigeration() {
               className="max-w-md"
             >
               <StickyNote color="green" rotate={-1.5}>
-                <p className="text-sm font-semibold text-foreground/80 mb-3">Delivery Checklist</p>
+                <p className="text-sm font-semibold text-foreground/80 mb-3">
+                  Delivery Checklist
+                </p>
                 <div className="space-y-2">
                   {[
                     "Complete WordPress to Supabase data migration",
                     "Custom CMS with intuitive editing interface",
-                    "SEO-preserved URL structure with 301 redirects",
+                    "301 redirects, XML sitemap & Google Search Console setup",
                     "Sub-second page load times on all pages",
                     "Mobile-first responsive design",
                     "Edge-deployed on Vercel CDN",
@@ -752,8 +845,9 @@ export default function AcroRefrigeration() {
               Have a similar project in mind?
             </h2>
             <p className="text-muted-foreground max-w-md mx-auto">
-              Whether it's a WordPress migration, a custom build, or a performance
-              overhaul — let's talk about what your website could become.
+              Whether it's a WordPress migration, a custom build, or a
+              performance overhaul — let's talk about what your website could
+              become.
             </p>
             <div className="flex justify-center gap-4 pt-2">
               <Link
@@ -783,7 +877,10 @@ export default function AcroRefrigeration() {
               <Link to="/" className="hover:text-foreground transition-colors">
                 Portfolio
               </Link>
-              <Link to="/blog" className="hover:text-foreground transition-colors">
+              <Link
+                to="/blog"
+                className="hover:text-foreground transition-colors"
+              >
                 Blog
               </Link>
             </div>
