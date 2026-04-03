@@ -1,5 +1,6 @@
 import { useRef, useEffect } from "react";
 import { motion, Variants } from "framer-motion";
+import { Link } from "react-router-dom";
 import CubeCanvas from "@/components/CubeCanvas";
 import HeroSection from "@/components/HeroSection";
 import Section from "@/components/Section";
@@ -16,9 +17,9 @@ import {
   Smartphone,
 } from "lucide-react";
 
-import projectBlockchain from "@/assets/project-blockchain.jpg";
-import projectProcurement from "@/assets/project-procurement.jpg";
-import projectInternalAudit from "@/assets/project-internal-audit.png";
+import projectBlockchain from "@/assets/project-blockchain.webp";
+import projectProcurement from "@/assets/project-procurement.webp";
+import projectInternalAudit from "@/assets/project-internal-audit.webp";
 
 const SKILLS = [
   {
@@ -300,7 +301,66 @@ export default function Index() {
           </motion.div>
         </Section>
 
-        <Section id="education" title="Education" subtitle="05">
+        <Section id="case-studies" title="Case Studies" subtitle="05">
+          <motion.div
+            className="space-y-4"
+            variants={staggerContainer}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, amount: 0.1 }}
+          >
+            <motion.p
+              variants={fadeUpItem}
+              className="text-muted-foreground leading-relaxed mb-6"
+            >
+              Real projects, real problems, real results — deep dives into how I
+              approach client work from start to finish.
+            </motion.p>
+
+            <motion.div variants={fadeUpItem}>
+              <Link to="/blog/acro-refrigeration">
+                <TiltCard className="rounded-xl bg-card/60 border border-border/30 overflow-hidden hover:border-border/60 transition-colors group">
+                  <div className="p-6 sm:p-8 space-y-4">
+                    <div className="flex items-center gap-3 text-xs font-mono text-muted-foreground">
+                      <span>Client Project</span>
+                      <span className="w-1 h-1 rounded-full bg-muted-foreground/40" />
+                      <span>Australia</span>
+                    </div>
+                    <h3 className="text-xl sm:text-2xl font-bold tracking-tight group-hover:text-foreground/90 transition-colors">
+                      Acro Refrigeration
+                    </h3>
+                    <p className="text-sm text-muted-foreground/80">
+                      From WordPress Bottleneck to a Lightning-Fast, SEO-Optimized
+                      Platform
+                    </p>
+                    <p className="text-sm text-muted-foreground leading-relaxed">
+                      A 50+ year Australian business had outgrown WordPress. I
+                      rebuilt their entire web presence — migrating 100+ blog posts,
+                      building a custom CMS, and boosting page speed by 10x.
+                    </p>
+                    <div className="flex flex-wrap gap-2 pt-1">
+                      {["Next.js", "Supabase", "Vercel", "Custom CMS", "SEO"].map(
+                        (tag) => (
+                          <span
+                            key={tag}
+                            className="px-2 py-0.5 text-xs font-mono rounded bg-accent/50 text-muted-foreground"
+                          >
+                            {tag}
+                          </span>
+                        )
+                      )}
+                    </div>
+                    <p className="text-sm font-medium text-foreground/60 group-hover:text-foreground/80 transition-colors pt-1">
+                      Read Case Study →
+                    </p>
+                  </div>
+                </TiltCard>
+              </Link>
+            </motion.div>
+          </motion.div>
+        </Section>
+
+        <Section id="education" title="Education" subtitle="06">
           <div className="space-y-6">
             <div className="space-y-1">
               <h3 className="text-lg font-semibold">
@@ -317,7 +377,7 @@ export default function Index() {
           </div>
         </Section>
 
-        <Section id="contact" title="Let's Connect" subtitle="06">
+        <Section id="contact" title="Let's Connect" subtitle="07">
           <p className="text-muted-foreground mb-8 max-w-xl">
             Have a project in mind or want to discuss an opportunity? I'd love
             to hear from you.
@@ -407,6 +467,12 @@ export default function Index() {
               </a>
             </div>
             <div className="flex gap-6">
+              <Link
+                to="/blog"
+                className="hover:text-foreground transition-colors"
+              >
+                Blog
+              </Link>
               <a
                 href="https://github.com/Kendaichi"
                 target="_blank"
