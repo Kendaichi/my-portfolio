@@ -335,7 +335,7 @@ export default function AcroRefrigeration() {
                       Painfully Slow
                     </p>
                     <p className="text-xs text-muted-foreground leading-relaxed">
-                      8+ second load times. Bloated plugins and unoptimized
+                      15+ second load times. Bloated plugins and unoptimized
                       images were dragging the entire experience down.
                     </p>
                   </StickyNote>
@@ -647,7 +647,7 @@ export default function AcroRefrigeration() {
                   set up 301 redirects across all legacy URLs to preserve link
                   equity, generated a comprehensive XML sitemap, and configured
                   Google Search Console to monitor indexing and ensure a smooth
-                  transition. The speed improvement alone — from 8+ seconds to
+                  transition. The speed improvement alone — from 15+ seconds to
                   under 1 — sent a powerful signal to Google.
                 </p>
               </motion.div>
